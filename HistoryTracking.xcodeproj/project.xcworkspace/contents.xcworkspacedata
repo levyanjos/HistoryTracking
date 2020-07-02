@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HistoryTracing.xcodeproj">
+      location = "self:/Users/levycristian/Desktop/HistoryTracing/HistoryTracking.xcodeproj">
    </FileRef>
 </Workspace>

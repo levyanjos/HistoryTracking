@@ -14,10 +14,14 @@
 		D77D099A24A96155009DAADF /* HistoryTracing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D77D099824A96155009DAADF /* HistoryTracing.xcdatamodeld */; };
 		D77D099C24A96158009DAADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D77D099B24A96158009DAADF /* Assets.xcassets */; };
 		D77D099F24A96158009DAADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D77D099D24A96158009DAADF /* LaunchScreen.storyboard */; };
+		D77D09A924A962C8009DAADF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77D09A824A962C8009DAADF /* CloudKit.framework */; };
+		D77D09AD24A9635E009DAADF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77D09AC24A9635E009DAADF /* CoreDataManager.swift */; };
+		D79AC0C424AA873700EC9F98 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79AC0C324AA873700EC9F98 /* MainViewModel.swift */; };
+		D79AC0C624AA87C800EC9F98 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79AC0C524AA87C800EC9F98 /* ItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D77D098C24A96155009DAADF /* HistoryTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HistoryTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77D098C24A96155009DAADF /* HistoryTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HistoryTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D77D098F24A96155009DAADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D77D099124A96155009DAADF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D77D099324A96155009DAADF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +30,11 @@
 		D77D099B24A96158009DAADF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D77D099E24A96158009DAADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D77D09A024A96158009DAADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77D09A624A962C4009DAADF /* HistoryTracing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HistoryTracing.entitlements; sourceTree = "<group>"; };
+		D77D09A824A962C8009DAADF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		D77D09AC24A9635E009DAADF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D79AC0C324AA873700EC9F98 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D79AC0C524AA87C800EC9F98 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77D09A924A962C8009DAADF /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,13 +54,14 @@
 			children = (
 				D77D098E24A96155009DAADF /* HistoryTracing */,
 				D77D098D24A96155009DAADF /* Products */,
+				D77D09A724A962C8009DAADF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		D77D098D24A96155009DAADF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D77D098C24A96155009DAADF /* HistoryTracing.app */,
+				D77D098C24A96155009DAADF /* HistoryTracking.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,6 +69,8 @@
 		D77D098E24A96155009DAADF /* HistoryTracing */ = {
 			isa = PBXGroup;
 			children = (
+				D77D09AB24A96325009DAADF /* CoreData */,
+				D77D09A624A962C4009DAADF /* HistoryTracing.entitlements */,
 				D77D098F24A96155009DAADF /* AppDelegate.swift */,
 				D77D099124A96155009DAADF /* SceneDelegate.swift */,
 				D77D099324A96155009DAADF /* ViewController.swift */,
@@ -70,12 +83,30 @@
 			path = HistoryTracing;
 			sourceTree = "<group>";
 		};
+		D77D09A724A962C8009DAADF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D77D09A824A962C8009DAADF /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D77D09AB24A96325009DAADF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D79AC0C324AA873700EC9F98 /* MainViewModel.swift */,
+				D79AC0C524AA87C800EC9F98 /* ItemViewModel.swift */,
+				D77D09AC24A9635E009DAADF /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D77D098B24A96155009DAADF /* HistoryTracing */ = {
+		D77D098B24A96155009DAADF /* HistoryTracking */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D77D09A324A96158009DAADF /* Build configuration list for PBXNativeTarget "HistoryTracing" */;
+			buildConfigurationList = D77D09A324A96158009DAADF /* Build configuration list for PBXNativeTarget "HistoryTracking" */;
 			buildPhases = (
 				D77D098824A96155009DAADF /* Sources */,
 				D77D098924A96155009DAADF /* Frameworks */,
@@ -85,9 +116,9 @@
 			);
 			dependencies = (
 			);
-			name = HistoryTracing;
+			name = HistoryTracking;
 			productName = HistoryTracing;
-			productReference = D77D098C24A96155009DAADF /* HistoryTracing.app */;
+			productReference = D77D098C24A96155009DAADF /* HistoryTracking.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +128,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Levy Cristian";
 				TargetAttributes = {
 					D77D098B24A96155009DAADF = {
@@ -105,7 +136,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D77D098724A96155009DAADF /* Build configuration list for PBXProject "HistoryTracing" */;
+			buildConfigurationList = D77D098724A96155009DAADF /* Build configuration list for PBXProject "HistoryTracking" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -118,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D77D098B24A96155009DAADF /* HistoryTracing */,
+				D77D098B24A96155009DAADF /* HistoryTracking */,
 			);
 		};
 /* End PBXProject section */
@@ -144,7 +175,10 @@
 				D77D099424A96155009DAADF /* ViewController.swift in Sources */,
 				D77D099A24A96155009DAADF /* HistoryTracing.xcdatamodeld in Sources */,
 				D77D099024A96155009DAADF /* AppDelegate.swift in Sources */,
+				D79AC0C624AA87C800EC9F98 /* ItemViewModel.swift in Sources */,
+				D77D09AD24A9635E009DAADF /* CoreDataManager.swift in Sources */,
 				D77D099224A96155009DAADF /* SceneDelegate.swift in Sources */,
+				D79AC0C424AA873700EC9F98 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +230,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -256,6 +291,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -288,6 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HistoryTracing/HistoryTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84MA3JMGLA;
 				INFOPLIST_FILE = HistoryTracing/Info.plist;
@@ -306,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HistoryTracing/HistoryTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84MA3JMGLA;
 				INFOPLIST_FILE = HistoryTracing/Info.plist;
@@ -323,7 +361,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D77D098724A96155009DAADF /* Build configuration list for PBXProject "HistoryTracing" */ = {
+		D77D098724A96155009DAADF /* Build configuration list for PBXProject "HistoryTracking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D77D09A124A96158009DAADF /* Debug */,
@@ -332,7 +370,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D77D09A324A96158009DAADF /* Build configuration list for PBXNativeTarget "HistoryTracing" */ = {
+		D77D09A324A96158009DAADF /* Build configuration list for PBXNativeTarget "HistoryTracking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D77D09A424A96158009DAADF /* Debug */,
