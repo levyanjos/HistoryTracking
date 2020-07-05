@@ -98,6 +98,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         NotificationCenter.default.post(Notification(name: NSNotification.Name.NSManagedObjectContextDidSave))
 
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let object = CoreDataManager.shared.fetchedResultsController.object(at: indexPath)
+        object.title = UUID().uuidString
+        CoreDataManager.shared.saveContext()
+    }
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
@@ -124,7 +129,7 @@ extension ViewController: NSFetchedResultsControllerDelegate {
       }
       break
     case .move:
-        if let sourceIndexPath = indexPath{
+        if let sourceIndexPath = indexPath {
             tableView.reloadRows(at: [sourceIndexPath], with: .fade)
         }
         break
