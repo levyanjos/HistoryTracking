@@ -28,7 +28,7 @@ open class CoreDataManager {
         let fetchRequest = NSFetchRequest<Item>(entityName: "Item")
         
         // Add Sort Descriptors
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "position", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller

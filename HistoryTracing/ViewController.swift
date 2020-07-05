@@ -34,9 +34,12 @@ class ViewController: UIViewController {
         let context = CoreDataManager.shared.getContext()
         let item = Item(context: context)
         item.title = UUID().uuidString
-        
+        item.position = Int16(CoreDataManager.shared.fetchedResultsController.fetchedObjects?.count ?? 0)
         CoreDataManager.shared.getContext().insert(item)
         CoreDataManager.shared.saveContext()
+    }
+    @IBAction func editDidTapped(_ sender: UIBarButtonItem) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
     }
 }
 
@@ -73,6 +76,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             CoreDataManager.shared.saveContext()
         }
     }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard var objects = CoreDataManager.shared.fetchedResultsController.fetchedObjects else { return }
+        CoreDataManager.shared.fetchedResultsController.delegate = nil
+
+        let object = objects[sourceIndexPath.row]
+        objects.remove(at: sourceIndexPath.row)
+        objects.insert(object, at: destinationIndexPath.row)
+        
+        for (index, object) in objects.enumerated() {
+            object.position = Int16(index)
+        }
+        
+        CoreDataManager.shared.saveContext()
+        CoreDataManager.shared.fetchedResultsController.delegate = self
+        NotificationCenter.default.post(Notification(name: NSNotification.Name.NSManagedObjectContextDidSave))
+
+    }
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
@@ -87,28 +112,24 @@ extension ViewController: NSFetchedResultsControllerDelegate {
       if let indexPath = newIndexPath {
         tableView.insertRows(at: [indexPath], with: .fade)
       }
-      break;
+      break
     case .delete:
       if let indexPath = indexPath {
         tableView.deleteRows(at: [indexPath], with: .fade)
       }
-      break;
+      break
     case .update:
       if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
         configureCell(cell, at: indexPath)
       }
-      break;
+      break
     case .move:
-      if let indexPath = indexPath {
-        tableView.deleteRows(at: [indexPath], with: .fade)
-      }
-      
-      if let newIndexPath = newIndexPath {
-        tableView.insertRows(at: [newIndexPath], with: .fade)
-      }
-        break;
+        if let sourceIndexPath = indexPath{
+            tableView.reloadRows(at: [sourceIndexPath], with: .fade)
+        }
+        break
     @unknown default:
-        break;
+        break
     }
   }
   
