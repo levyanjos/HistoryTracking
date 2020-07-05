@@ -17,12 +17,4 @@ public class MainViewModel {
             fatalError(error.localizedDescription)
         }
     }
-    @objc public func preocessNotification(_ notification: NSNotification) {
-      CoreDataManager.shared.operationQueue.addOperation {
-        let context = CoreDataManager.shared.getContext()
-           context.performAndWait {
-            CoreDataManager.shared.saveContext()
-           }
-       }
-    }
 }

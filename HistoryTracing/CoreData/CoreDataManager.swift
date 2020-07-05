@@ -39,7 +39,6 @@ open class CoreDataManager {
         
         return fetchedResultsController
       }()
-    
 
     public lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "HistoryTracing")
@@ -47,8 +46,11 @@ open class CoreDataManager {
         guard let description = container.persistentStoreDescriptions.first else {
             fatalError("No description found")
         }
-        description.setOption(true as NSObject, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        
         description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        let remoteChangeKey = "NSPersistentStoreRemoteChangeNotificationOptionKey"
+        description.setOption(true as NSNumber, forKey: remoteChangeKey)
+        
         container.persistentStoreDescriptions = [description]
         
         container.loadPersistentStores(completionHandler: { (_, error) in
@@ -56,20 +58,14 @@ open class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        
+        try? container.viewContext.setQueryGenerationFrom(.current)
+
         container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         return container
     }()
 
     // MARK: - Core Data Saving support
-    
-    public lazy var operationQueue: OperationQueue = {
-       let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
     
     public func saveContext () {
         let context = persistentContainer.viewContext
@@ -92,21 +88,4 @@ open class CoreDataManager {
         guard let description = NSEntityDescription.entity(forEntityName: entityName, in: context) else {return nil}
         return description
     }
-    
-//    public func getAll(entityName: String,
-//                       with predicate: NSPredicate?) {
-//        let entity = self.getEntityDescription(entityName: entityName)
-//        let context = self.getContext()
-//        let request: NSFetchRequest = NSFetchRequest<NSFetchRequestResult>()
-//        request.entity = entity
-//        request.predicate = predicate
-//        resultController = NSFetchedResultsController(fetchRequest: request,
-//                                                      managedObjectContext: context,
-//                                                      sectionNameKeyPath: nil, cacheName: nil)
-//        do {
-//            try resultController.performFetch()
-//        } catch {
-//            fatalError(error.localizedDescription)
-//        }
-//    }
 }

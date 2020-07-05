@@ -24,9 +24,6 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         CoreDataManager.shared.fetchedResultsController.delegate = self
-        NotificationCenter.default.addObserver(viewModel, selector: #selector(viewModel.preocessNotification(_:)), name: .NSPersistentStoreRemoteChange, object: nil)
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,8 +31,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addElement(_ sender: UIBarButtonItem) {
-        let item = Item(context: CoreDataManager.shared.getContext())
+        let context = CoreDataManager.shared.getContext()
+        let item = Item(context: context)
         item.title = UUID().uuidString
+        
         CoreDataManager.shared.getContext().insert(item)
         CoreDataManager.shared.saveContext()
     }
@@ -70,16 +69,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let sections = CoreDataManager.shared.fetchedResultsController.sections, let objects = sections[indexPath.section].objects as? [Item] else {
-              return
-            }
-            CoreDataManager.shared.getContext().delete(objects[indexPath.row])
+            CoreDataManager.shared.getContext().delete(CoreDataManager.shared.fetchedResultsController.object(at: indexPath))
             CoreDataManager.shared.saveContext()
         }
     }
 }
 
-extension ViewController: NSFetchedResultsControllerDelegate{
+extension ViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.beginUpdates()
